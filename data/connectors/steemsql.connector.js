@@ -1,10 +1,20 @@
 import Sequelize from "sequelize";
 import _ from "lodash";
 
-const db = new Sequelize("steemit", "steemit", "steemit", {
+const db = new Sequelize("DBSteem", "steemit", "steemit", {
   dialect: "mssql",
-  host: "https://sql.steemsql.com"
+  host: "sql.steemsql.com"
 });
+
+const Mention = db.define(
+  "TxComments",
+  {
+    author: Sequelize.STRING,
+    title: Sequelize.STRING,
+    body: Sequelize.STRING
+  },
+  { timestamps: false }
+);
 
 const UserModel = db.define("user", {
   firstName: { type: Sequelize.STRING },
@@ -35,9 +45,10 @@ PostModel.belongsTo(UserModel);
 //   });
 // });
 
+// const Mention = db.models.mention;
 const User = db.models.user;
 const Post = db.models.post;
 
-export { User, Post };
+export { User, Post, Mention };
 
 export default db;

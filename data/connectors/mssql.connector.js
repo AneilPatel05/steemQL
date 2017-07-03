@@ -1,15 +1,47 @@
-const sql = require("mssql");
+var sql = require("mssql"), connPoolPromise = null;
 
-const mssqlServer = async () => {
-  try {
-    const pool = await sql.connect(
-      "mssql://steemit:steemit@sql.steemsql.com/DBSteem"
-    );
-    const result = await sql.query`select * from TxComments WHERE CONTAINS(body, '@sarasate')`;
-    console.log(result);
-  } catch (err) {
-    console.log(err);
-  }
+const config = {
+  user: "steemit",
+  password: "steemit",
+  server: "sql.steemsql.com",
+  database: "DBSteem"
 };
 
-export default mssqlServer;
+function getConnPoolPromise() {
+  if (connPoolPromise) return connPoolPromise;
+
+  connPoolPromise = new Promise(function(resolve, reject) {
+    var conn = new sql.Connection(config);
+
+    conn.on("close", function() {
+      connPoolPromise = null;
+    });
+
+    conn
+      .connect()
+      .then(function(connPool) {
+        return resolve(connPool);
+      })
+      .catch(function(err) {
+        connPoolPromise = null;
+        return reject(err);
+      });
+  });
+
+  return connPoolPromise;
+}
+
+// Fetch data example
+exports.query = function(sqlQuery, callback) {
+  getConnPoolPromise()
+    .then(function(connPool) {
+      var sqlRequest = new sql.Request(connPool);
+      return sqlRequest.query(sqlQuery);
+    })
+    .then(function(result) {
+      callback(null, result);
+    })
+    .catch(function(err) {
+      callback(err);
+    });
+};

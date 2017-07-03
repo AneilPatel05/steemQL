@@ -4,3 +4,5 @@ const Mention = `
     author: String
   }
 `;
+
+export default Mention

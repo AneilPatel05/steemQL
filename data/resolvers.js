@@ -1,5 +1,6 @@
 import _ from "lodash";
 import UserResolvers from "./user/user.resolver";
+import MentionResolvers from "./mentions/mention.resolvers";
 
 const rootResolvers = {
   Query: {},
@@ -20,4 +21,4 @@ const rootResolvers = {
   }
 };
 
-export default _.merge(rootResolvers, UserResolvers);
+export default _.merge(rootResolvers, UserResolvers, MentionResolvers);
