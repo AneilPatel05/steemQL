@@ -1,8 +1,15 @@
 const Mention = `
   type Mention {
-    ID: ID
+    tx_id: ID
     author: String
+    title: String
+    body: String
+    permlink: String
+    parent_author: String
+    parent_permlink: String
+    timestamp: String 
+    json_metadata: String
   }
 `;
 
-export default Mention
+export default Mention;

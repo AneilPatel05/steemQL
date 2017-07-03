@@ -7,41 +7,15 @@ const config = {
   database: "DBSteem"
 };
 
-function getConnPoolPromise() {
-  if (connPoolPromise) return connPoolPromise;
-
-  connPoolPromise = new Promise(function(resolve, reject) {
-    var conn = new sql.Connection(config);
-
-    conn.on("close", function() {
-      connPoolPromise = null;
-    });
-
-    conn
-      .connect()
-      .then(function(connPool) {
-        return resolve(connPool);
-      })
-      .catch(function(err) {
-        connPoolPromise = null;
-        return reject(err);
-      });
+const sqlServer = sql
+  .connect(config)
+  // .then(() => {
+  // return sql.query`select * from mytable where id = ${value}`;
+  // })
+  .then(result => {
+    console.dir("mssql connection success");
+  })
+  .catch(err => {
+    console.log(err);
+    // ... error checks
   });
-
-  return connPoolPromise;
-}
-
-// Fetch data example
-exports.query = function(sqlQuery, callback) {
-  getConnPoolPromise()
-    .then(function(connPool) {
-      var sqlRequest = new sql.Request(connPool);
-      return sqlRequest.query(sqlQuery);
-    })
-    .then(function(result) {
-      callback(null, result);
-    })
-    .catch(function(err) {
-      callback(err);
-    });
-};
