@@ -1,5 +1,6 @@
 import _ from "lodash";
 import GlobalsResolvers from "./globals/globals.resolver";
+import TagResolvers from "./tag/tag.resolver";
 import UserResolvers from "./user/user.resolver";
 import MentionResolvers from "./mentions/mention.resolvers";
 
@@ -25,6 +26,7 @@ const rootResolvers = {
 export default _.merge(
   rootResolvers,
   GlobalsResolvers,
+  TagResolvers,
   UserResolvers,
   MentionResolvers
 );

@@ -2,6 +2,7 @@ import { makeExecutableSchema } from "graphql-tools";
 import resolvers from "./resolvers";
 import Config from "./globals/config.schema";
 import DGP from "./globals/dgp.schema";
+import Tag from "./tag/tag.schema";
 import User from "./user/user.schema";
 import Mention from "./mentions/mention.schema";
 
@@ -12,6 +13,7 @@ const rootSchema = `
     mentions(username: String!): [Mention]
     getConfig: Config
     getDynamicGlobalProperties: DGP
+    getTrendingTags(afterTag: String!, limit: Int): [Tag]
   }
   
   scalar Date
@@ -23,7 +25,7 @@ const rootSchema = `
   }
 `;
 
-const typeDefs = [rootSchema, Config, DGP, User, Mention];
+const typeDefs = [rootSchema, Config, DGP, Tag, User, Mention];
 
 const schema = makeExecutableSchema({ typeDefs, resolvers });
 
