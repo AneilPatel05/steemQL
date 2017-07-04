@@ -9,12 +9,13 @@ import Mention from "./mentions/mention.schema";
 
 const rootSchema = `
   type Query {
-    user(username: String!, limit: Int): User 
+    user(username: String!): User 
     users(users: [String]!, limit: Int): [User]
     mentions(username: String!): [Mention]
     getConfig: Config
     getDynamicGlobalProperties: DGP
     getTrendingTags(afterTag: String!, limit: Int): [Tag]
+    # Limit <= 100
     getDiscussionsByCreated(tags: String!, limit: Int):[Post]
   }
   

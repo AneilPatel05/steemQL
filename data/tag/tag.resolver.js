@@ -1,4 +1,5 @@
 import steem from "../connectors/steemjs.connector.js";
+import _ from "lodash";
 
 const TagResolvers = {
   Query: {
@@ -14,8 +15,15 @@ const TagResolvers = {
       return tags;
     },
 
+    /**
+     *
+     * @param root
+     * @param args.jjj
+     * @returns {Promise.<*>}
+     */
     async getDiscussionsByCreated(root, args) {
-      const query = { ...args };
+      const query = _.merge({ limit: 25 }, { ...args });
+
       console.log(query);
       const posts = await steem.api.getDiscussionsByCreated(query);
       console.log(posts);
