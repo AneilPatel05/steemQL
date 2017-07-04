@@ -9,6 +9,13 @@ const UserResolvers = {
       console.log(users);
       return _.head(users);
     },
+
+    /**
+     * Get a list of users.
+     * @param root
+     * @param args.users - Array of usernames.
+     * @returns {Promise.<*>}
+     */
     async users(root, args) {
       const users = await steem.api.getAccounts(args.users);
       return users;

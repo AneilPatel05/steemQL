@@ -1,6 +1,6 @@
 import { makeExecutableSchema } from "graphql-tools";
-import GraphQLJSON from "graphql-type-json";
 import resolvers from "./resolvers";
+import Config from "./globals/config.schema";
 import User from "./user/user.schema";
 import Mention from "./mentions/mention.schema";
 
@@ -9,6 +9,7 @@ const rootSchema = `
     user(username: String!, limit: Int): User 
     users(users: [String]!, limit: Int): [User]
     mentions(username: String!): [Mention]
+    getConfig: Config
   }
   
   scalar Date
@@ -20,7 +21,7 @@ const rootSchema = `
   }
 `;
 
-const typeDefs = [rootSchema, User, Mention];
+const typeDefs = [rootSchema, Config, User, Mention];
 
 const schema = makeExecutableSchema({ typeDefs, resolvers });
 
