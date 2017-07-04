@@ -35,6 +35,7 @@
     "lodash": "^4.17.4",
     "mssql": "^4.0.4",
     "mysql2": "^1.3.5",
+    "path": "^0.12.7",
     "steem": "^0.5.20",
     "tedious": "^2.0.0"
   },
@@ -42,7 +43,7 @@
     "babel-cli": "6.5.1",
     "babel-core": "^6.5.2",
     "babel-eslint": "^6.0.0-beta.6",
-    "babel-polyfill": "6.5.0",
+    "babel-polyfill": "^6.23.0",
     "babel-preset-es2015": "6.5.0",
     "babel-preset-react": "^6.5.0",
     "babel-preset-stage-0": "6.5.0",
