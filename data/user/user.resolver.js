@@ -8,6 +8,10 @@ const UserResolvers = {
       const users = await steem.api.getAccounts([args.username]);
       console.log(users);
       return _.head(users);
+    },
+    async users(root, args) {
+      const users = await steem.api.getAccounts(args.users);
+      return users;
     }
   }
 };

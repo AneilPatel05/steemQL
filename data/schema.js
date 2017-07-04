@@ -7,6 +7,7 @@ import Mention from "./mentions/mention.schema";
 const rootSchema = `
   type Query {
     user(username: String!, limit: Int): User 
+    users(users: [String]!, limit: Int): [User]
     mentions(username: String!): [Mention]
   }
   
