@@ -11,15 +11,8 @@ const TagResolvers = {
     async getTrendingTags(root, args) {
       const { afterTag, limit = 25 } = args;
       const tags = await steem.api.getTrendingTags(afterTag, limit);
+      console.log(tags);
       return tags;
-    },
-
-    async getDiscussionsByCreated(root, args) {
-      const query = { ...args };
-      console.log(query);
-      const posts = await steem.api.getDiscussionsByCreated(query);
-      console.log(posts);
-      return posts;
     }
   }
 };

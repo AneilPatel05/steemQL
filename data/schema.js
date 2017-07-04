@@ -3,6 +3,7 @@ import resolvers from "./resolvers";
 import Config from "./globals/config.schema";
 import DGP from "./globals/dgp.schema";
 import Tag from "./tag/tag.schema";
+import Post from "./post/post.schema";
 import User from "./user/user.schema";
 import Mention from "./mentions/mention.schema";
 
@@ -14,6 +15,7 @@ const rootSchema = `
     getConfig: Config
     getDynamicGlobalProperties: DGP
     getTrendingTags(afterTag: String!, limit: Int): [Tag]
+    getDiscussionsByCreated(tags: String!, limit: Int):[Post]
   }
   
   scalar Date
@@ -25,7 +27,7 @@ const rootSchema = `
   }
 `;
 
-const typeDefs = [rootSchema, Config, DGP, Tag, User, Mention];
+const typeDefs = [rootSchema, Config, DGP, Tag, Post, User, Mention];
 
 const schema = makeExecutableSchema({ typeDefs, resolvers });
 
