@@ -6,7 +6,6 @@ const UserResolvers = {
     // Get user via steem.
     async user(root, args, context) {
       const users = await steem.api.getAccounts([args.username]);
-      console.log(users);
       return _.head(users);
     },
 
@@ -19,6 +18,15 @@ const UserResolvers = {
     async users(root, args) {
       const users = await steem.api.getAccounts(args.users);
       return users;
+    },
+
+    /**
+     * Get number of steem accounts.
+     * @returns {Promise.<*>}
+     */
+    async getAccountCount() {
+      const count = await steem.api.getAccountCount()
+      return count
     }
   }
 };

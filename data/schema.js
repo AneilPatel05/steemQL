@@ -11,6 +11,7 @@ const rootSchema = `
   type Query {
     user(username: String!): User 
     users(users: [String]!, limit: Int): [User]
+    getAccountCount: Int
     mentions(username: String!): [Mention]
     getConfig: Config
     getDynamicGlobalProperties: DGP
