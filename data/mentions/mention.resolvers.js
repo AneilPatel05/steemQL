@@ -8,8 +8,6 @@ const MentionResolvers = {
   Query: {
     // Get user via steem.
     async mentions(root, args, context) {
-      // SELECT author, title, body, url FROM TxComments WHERE CONTAINS(title,
-      // '@arcange')
       const { username, limit = 25 } = args;
       const query = "@" + username;
 
@@ -18,7 +16,6 @@ const MentionResolvers = {
         WHERE CONTAINS(body, ${query})
         OR CONTAINS(title, ${query}) 
         ORDER BY timestamp DESC`;
-      console.log(result.recordset);
       return result.recordset;
     }
   }
