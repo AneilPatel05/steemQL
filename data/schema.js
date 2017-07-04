@@ -1,6 +1,7 @@
 import { makeExecutableSchema } from "graphql-tools";
 import resolvers from "./resolvers";
 import Config from "./globals/config.schema";
+import DGP from "./globals/dgp.schema";
 import User from "./user/user.schema";
 import Mention from "./mentions/mention.schema";
 
@@ -10,6 +11,7 @@ const rootSchema = `
     users(users: [String]!, limit: Int): [User]
     mentions(username: String!): [Mention]
     getConfig: Config
+    getDynamicGlobalProperties: DGP
   }
   
   scalar Date
@@ -21,7 +23,7 @@ const rootSchema = `
   }
 `;
 
-const typeDefs = [rootSchema, Config, User, Mention];
+const typeDefs = [rootSchema, Config, DGP, User, Mention];
 
 const schema = makeExecutableSchema({ typeDefs, resolvers });
 
