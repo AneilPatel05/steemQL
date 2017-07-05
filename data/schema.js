@@ -7,6 +7,7 @@ import Post from "./post/post.schema";
 import User from "./user/user.schema";
 import UserHistory from "./user/userHistory.schema";
 import Mention from "./mentions/mention.schema";
+import Test from "./test/test.schema";
 
 const rootSchema = `
   type Query {
@@ -19,6 +20,7 @@ const rootSchema = `
     getTrendingTags(afterTag: String!, limit: Int): [Tag]
     # Limit <= 100
     getDiscussionsByCreated(tags: String!, limit: Int):[Post]
+    commentsSQL: String
   }
   
   scalar Date
@@ -38,7 +40,8 @@ const typeDefs = [
   Post,
   User,
   UserHistory,
-  Mention
+  Mention,
+  Test
 ];
 
 const schema = makeExecutableSchema({ typeDefs, resolvers });

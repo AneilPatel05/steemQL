@@ -3,6 +3,7 @@ import GlobalsResolvers from "./globals/globals.resolver";
 import TagResolvers from "./tag/tag.resolver";
 import UserResolvers from "./user/user.resolver";
 import MentionResolvers from "./mentions/mention.resolvers";
+import TestResolvers from "./test/test.resolvers";
 
 const rootResolvers = {
   Query: {},
@@ -28,5 +29,6 @@ export default _.merge(
   GlobalsResolvers,
   TagResolvers,
   UserResolvers,
-  MentionResolvers
+  MentionResolvers,
+  TestResolvers
 );
