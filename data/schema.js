@@ -5,19 +5,25 @@ import DGP from "./globals/dgp.schema";
 import Tag from "./tag/tag.schema";
 import Post from "./post/post.schema";
 import User from "./user/user.schema";
+import UserHistory from "./user/userHistory.schema";
+import Vote from "./vote/vote.schema";
 import Mention from "./mentions/mention.schema";
+import Test from "./test/test.schema";
 
 const rootSchema = `
   type Query {
     user(username: String!): User 
     users(users: [String]!, limit: Int): [User]
-    getAccountCount: Int
+    accountCount: Int
+    userHistory(username: String!, from: Int, limit: Int): String 
     mentions(username: String!): [Mention]
-    getConfig: Config
-    getDynamicGlobalProperties: DGP
-    getTrendingTags(afterTag: String!, limit: Int): [Tag]
+    config: Config
+    dynamicGlobalProperties: DGP
+    trendingTags(afterTag: String!, limit: Int): [Tag]
     # Limit <= 100
-    getDiscussionsByCreated(tags: String!, limit: Int):[Post]
+    discussionsByCreated(tags: String!, limit: Int):[Post]
+    commentsSQL: String
+    activeVotes(username: String!, permlink: String!): [Vote]
   }
   
   scalar Date
@@ -29,7 +35,18 @@ const rootSchema = `
   }
 `;
 
-const typeDefs = [rootSchema, Config, DGP, Tag, Post, User, Mention];
+const typeDefs = [
+  rootSchema,
+  Config,
+  DGP,
+  Tag,
+  Post,
+  User,
+  UserHistory,
+  Vote,
+  Mention,
+  Test
+];
 
 const schema = makeExecutableSchema({ typeDefs, resolvers });
 

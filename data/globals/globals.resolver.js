@@ -8,7 +8,7 @@ const GlobalsResolvers = {
      * @param root
      * @returns {Promise.<*>}
      */
-    async getConfig(root) {
+    async config(root) {
       const config = await steem.api.getConfig();
       return config;
     },
@@ -17,7 +17,7 @@ const GlobalsResolvers = {
      * Get Dynamic Global Properties object.
      * @returns {Promise.<*>}
      */
-    async getDynamicGlobalProperties() {
+    async dynamicGlobalProperties() {
       const dgp = await steem.api.getDynamicGlobalProperties()
       console.log(dgp)
       return dgp

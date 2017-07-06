@@ -9,7 +9,7 @@ const TagResolvers = {
      * args.limit - Number of items to fetch.
      * @returns {Promise.<*>}
      */
-    async getTrendingTags(root, args) {
+    async trendingTags(root, args) {
       const { afterTag, limit = 25 } = args;
       const tags = await steem.api.getTrendingTags(afterTag, limit);
       return tags;
@@ -21,7 +21,7 @@ const TagResolvers = {
      * @param args.jjj
      * @returns {Promise.<*>}
      */
-    async getDiscussionsByCreated(root, args) {
+    async discussionsByCreated(root, args) {
       const query = _.merge({ limit: 25 }, { ...args });
 
       console.log(query);

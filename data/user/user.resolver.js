@@ -24,9 +24,22 @@ const UserResolvers = {
      * Get number of steem accounts.
      * @returns {Promise.<*>}
      */
-    async getAccountCount() {
-      const count = await steem.api.getAccountCount()
-      return count
+    async accountCount() {
+      const count = await steem.api.getAccountCount();
+      return count;
+    },
+    /**
+     * Get accounts history from steem.
+     * @param root
+     * @param args
+     * @return {Promise.<*>}
+     */
+    async userHistory(root, args) {
+      const { username, from = 50, limit = 25 } = args;
+      const history = await steem.api.getAccountHistory(username, from, limit);
+      console.log(JSON.stringify(history));
+      // Have to flatten
+      return JSON.stringify(history);
     }
   }
 };

@@ -1,20 +1,18 @@
 import steem from "../connectors/steemjs.connector.js";
 
-const TagResolvers = {
+const PostResolvers = {
   Query: {
     /**
-     * Get trending tags.
-     * args.afterTag - Start tag, can be "".
-     * args.limit - Number of items to fetch.
+     * Get posts.
+     * args
      * @returns {Promise.<*>}
      */
-    async getTrendingTags(root, args) {
+    async posts(root, args) {
       const { afterTag, limit = 25 } = args;
       const tags = await steem.api.getTrendingTags(afterTag, limit);
-      console.log(tags);
       return tags;
     }
   }
 };
 
-export default TagResolvers;
+export default PostResolvers;
