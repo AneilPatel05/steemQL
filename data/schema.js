@@ -7,6 +7,7 @@ import Post from "./post/post.schema";
 import User from "./user/user.schema";
 import UserHistory from "./user/userHistory.schema";
 import Vote from "./vote/vote.schema";
+import AccountVote from "./vote/accountVote.schema";
 import Mention from "./mentions/mention.schema";
 import Test from "./test/test.schema";
 
@@ -24,6 +25,7 @@ const rootSchema = `
     discussionsByCreated(tags: String!, limit: Int):[Post]
     commentsSQL: String
     activeVotes(username: String!, permlink: String!): [Vote]
+    accountVotes(username: String!): [AccountVote]
   }
   
   scalar Date
@@ -44,6 +46,7 @@ const typeDefs = [
   User,
   UserHistory,
   Vote,
+  AccountVote,
   Mention,
   Test
 ];

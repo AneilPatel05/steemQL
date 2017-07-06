@@ -9,7 +9,18 @@ const VoteResolvers = {
     async activeVotes(root, args) {
       const { username, permlink } = args;
       const votes = await steem.api.getActiveVotes(username, permlink);
-      console.log(votes);
+      return votes;
+    },
+
+    /**
+     * Get account votes.
+     * @param root
+     * @param args
+     * @returns {Promise.<void>}
+     */
+    async accountVotes(root, args) {
+      const { username } = args;
+      const votes = await steem.api.getAccountVotes(username);
       return votes;
     }
   }
