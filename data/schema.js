@@ -22,7 +22,7 @@ const rootSchema = `
     dynamicGlobalProperties: DGP
     trendingTags(afterTag: String!, limit: Int): [Tag]
     # Limit <= 100
-    discussionsByCreated(tags: String!, limit: Int):[Post]
+    discussionsByCreated(tag: String!, limit: Int):[Post]
     commentsSQL: String
     activeVotes(username: String!, permlink: String!): [Vote]
     accountVotes(username: String!): [AccountVote]

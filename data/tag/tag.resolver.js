@@ -18,7 +18,7 @@ const TagResolvers = {
     /**
      *
      * @param root
-     * @param args.jjj
+     * @param args
      * @returns {Promise.<*>}
      */
     async discussionsByCreated(root, args) {
@@ -26,7 +26,6 @@ const TagResolvers = {
 
       console.log(query);
       const posts = await steem.api.getDiscussionsByCreated(query);
-      console.log(posts);
       return posts;
     }
   }
