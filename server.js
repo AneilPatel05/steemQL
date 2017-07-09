@@ -3,7 +3,6 @@ import { graphqlExpress, graphiqlExpress } from "graphql-server-express";
 import bodyParser from "body-parser";
 import schema from "./data/schema";
 import cors from "cors";
-import steem from "steem";
 
 const GRAPHQL_PORT = 3010;
 
