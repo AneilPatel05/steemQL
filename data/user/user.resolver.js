@@ -1,5 +1,6 @@
 import steem from "../connectors/steemjs.connector.js";
 import _ from "lodash";
+import moment from "moment";
 
 const UserResolvers = {
   Query: {
@@ -40,6 +41,21 @@ const UserResolvers = {
       console.log(JSON.stringify(history));
       // Have to flatten
       return JSON.stringify(history);
+    }
+  },
+  User: {
+    // Get posts for user
+    async posts(root, args) {
+      const { limit = 25 } = args;
+
+      const posts = await steem.api.getDiscussionsByAuthorBeforeDateAsync(
+        root.name,
+        "",
+        moment().utc().format("YYYY-MM-DD[T]HHmmss"),
+        limit
+      );
+
+      return posts;
     }
   }
 };

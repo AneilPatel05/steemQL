@@ -64,6 +64,7 @@ const User = `
     last_root_post: String
     vesting_balance: String
     reputation: Int 
+    posts(limit: Int): [Post]
   }`;
 
 export default User;
