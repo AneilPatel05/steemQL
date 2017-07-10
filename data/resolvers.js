@@ -4,6 +4,7 @@ import TagResolvers from "./tag/tag.resolver";
 import UserResolvers from "./user/user.resolver";
 import VoteResolvers from "./vote/vote.resolver";
 import MentionResolvers from "./mentions/mention.resolvers";
+import PostResolvers from "./post/post.resolver";
 import TestResolvers from "./test/test.resolvers";
 
 const rootResolvers = {
@@ -32,5 +33,6 @@ export default _.merge(
   UserResolvers,
   VoteResolvers,
   MentionResolvers,
+  PostResolvers,
   TestResolvers
 );

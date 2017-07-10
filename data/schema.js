@@ -26,6 +26,7 @@ const rootSchema = `
     commentsSQL: String
     activeVotes(username: String!, permlink: String!): [Vote]
     accountVotes(username: String!): [AccountVote]
+    searchPosts(searchString: String!): [Post]
   }
   
   scalar Date
