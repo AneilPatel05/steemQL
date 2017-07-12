@@ -57,13 +57,13 @@ const User = `
     average_bandwidth: String
     lifetime_bandwidth: String
     last_bandwidth_update: String
-    average_market_bandwidth: Int 
+    average_market_bandwidth: String 
     lifetime_market_bandwidth: String 
     last_market_bandwidth_update: String
     last_post: String
     last_root_post: String
     vesting_balance: String
-    reputation: Int 
+    reputation: String 
     posts(limit: Int): [Post]
   }`;
 
