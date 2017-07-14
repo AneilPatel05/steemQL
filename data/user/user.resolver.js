@@ -43,6 +43,31 @@ const UserResolvers = {
       return JSON.stringify(history);
     }
   },
+  Mutation: {
+    async accountUpdate(root, args) {
+      console.log(args);
+      const {
+        wif,
+        account = undefined,
+        owner = undefined,
+        active = undefined,
+        posting = undefined,
+        memoKey = undefined,
+        jsonMetadata = undefined
+      } = args;
+      const result = await steem.broadcast.accountUpdateAsync(
+        wif,
+        account,
+        owner,
+        active,
+        posting,
+        memoKey,
+        JSON.parse(jsonMetadata)
+      );
+      console.log(result);
+      return result;
+    }
+  },
   User: {
     // Get posts for user
     async posts(root, args) {

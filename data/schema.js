@@ -9,6 +9,7 @@ import UserHistory from "./user/userHistory.schema";
 import Vote from "./vote/vote.schema";
 import AccountVote from "./vote/accountVote.schema";
 import Mention from "./mentions/mention.schema";
+import Key from "./key/key.schema";
 import Test from "./test/test.schema";
 
 const rootSchema = `
@@ -27,6 +28,11 @@ const rootSchema = `
     activeVotes(username: String!, permlink: String!): [Vote]
     accountVotes(username: String!): [AccountVote]
     searchPosts(searchString: String!): [Post]
+    keyReferences(key: [String]!): Key
+  }
+  
+  type Mutation {
+    accountUpdate(wif: String!, account: String!, owner: String, activeKey: String, postingKey: String, memoKey: String, jsonMetadata: String): User 
   }
   
   scalar Date
@@ -35,6 +41,7 @@ const rootSchema = `
 
   schema {
     query: Query
+    mutation: Mutation
   }
 `;
 
@@ -49,6 +56,7 @@ const typeDefs = [
   Vote,
   AccountVote,
   Mention,
+  Key,
   Test
 ];
 
