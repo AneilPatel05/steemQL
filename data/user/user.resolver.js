@@ -45,26 +45,24 @@ const UserResolvers = {
   },
   Mutation: {
     async accountUpdate(root, args) {
-      console.log(args);
       const {
         wif,
         account = undefined,
         owner = undefined,
-        active = undefined,
-        posting = undefined,
-        memoKey = undefined,
+        privatActiveKey = undefined,
+        postingKey = undefined,
+        publicMemoKey = undefined,
         jsonMetadata = undefined
       } = args;
       const result = await steem.broadcast.accountUpdateAsync(
         wif,
         account,
         owner,
-        active,
-        posting,
-        memoKey,
+        privatActiveKey,
+        postingKey,
+        publicMemoKey,
         JSON.parse(jsonMetadata)
       );
-      console.log(result);
       return result;
     }
   },
