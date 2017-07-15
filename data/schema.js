@@ -31,7 +31,9 @@ const rootSchema = `
   }
   
   type Mutation {
-    accountUpdate(wif: String!, account: String!, owner: String, privateActiveKey: String, postingKey: String, publicMemoKey: String, jsonMetadata: String): User 
+    accountUpdate(wif: String!, account: String!, owner: String, 
+      privateActiveKey: String, postingKey: String, publicMemoKey: String!, 
+      jsonMetadata: String): User 
   }
   
   scalar Date

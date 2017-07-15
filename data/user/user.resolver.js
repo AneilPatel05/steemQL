@@ -47,18 +47,18 @@ const UserResolvers = {
     async accountUpdate(root, args) {
       const {
         wif,
-        account = undefined,
-        owner = undefined,
-        privatActiveKey = undefined,
-        postingKey = undefined,
-        publicMemoKey = undefined,
-        jsonMetadata = undefined
+        account,
+        owner = null,
+        activeKey = null,
+        postingKey = null,
+        publicMemoKey,
+        jsonMetadata = null
       } = args;
       const result = await steem.broadcast.accountUpdateAsync(
         wif,
         account,
         owner,
-        privatActiveKey,
+        activeKey,
         postingKey,
         publicMemoKey,
         JSON.parse(jsonMetadata)
