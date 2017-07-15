@@ -1,11 +1,11 @@
 import _ from "lodash";
 import GlobalsResolvers from "./globals/globals.resolver";
+import AuthResolvers from "./auth/auth.resolvers";
 import TagResolvers from "./tag/tag.resolver";
 import UserResolvers from "./user/user.resolver";
 import VoteResolvers from "./vote/vote.resolver";
 import MentionResolvers from "./mentions/mention.resolvers";
 import PostResolvers from "./post/post.resolver";
-import KeyResolvers from "./key/key.resolver";
 import TestResolvers from "./test/test.resolvers";
 
 const rootResolvers = {
@@ -30,11 +30,11 @@ const rootResolvers = {
 export default _.merge(
   rootResolvers,
   GlobalsResolvers,
+  AuthResolvers,
   TagResolvers,
   UserResolvers,
   VoteResolvers,
   MentionResolvers,
   PostResolvers,
-  KeyResolvers,
   TestResolvers
 );
