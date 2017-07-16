@@ -1,6 +1,6 @@
 const Post = `
   type Post {
-    id: Int
+    id: ID 
     author: String
     permlink: String
     category: String

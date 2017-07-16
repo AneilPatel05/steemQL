@@ -15,6 +15,7 @@ const rootSchema = `
   type Query {
     user(username: String!): User 
     users(users: [String]!, limit: Int): [User]
+    posts: [Post]
     accountCount: Int
     userHistory(username: String!, from: Int, limit: Int): String 
     mentions(username: String!): [Mention]

@@ -1,5 +1,4 @@
-import steem from "../connectors/steemjs.connector.js";
-import db from "../connectors/steemdata.connector";
+import { Posts } from "../connectors/steemdata.connector";
 
 const PostResolvers = {
   Query: {
@@ -8,11 +7,11 @@ const PostResolvers = {
      * args
      * @returns {Promise.<*>}
      */
-    // async posts(root, args) {
-    //   const { afterTag, limit = 25 } = args;
-    //   const tags = await steem.api.getTrendingTags(afterTag, limit);
-    //   return tags;
-    // },
+    async posts(root, args) {
+      const { afterTag, limit = 25 } = args;
+      const posts = await Posts.find({}).sort({ created: -1 }).limit(10).exec();
+      return posts;
+    },
 
     //  Search posts
     async searchPosts(root, args) {
@@ -21,7 +20,7 @@ const PostResolvers = {
       const result = await Posts.find({ author: "sarasate" }, (err, res) => {
         console.log(err, res);
       });
-      console.log(result);
+      console.log(result, "result");
       return result;
     }
   }
