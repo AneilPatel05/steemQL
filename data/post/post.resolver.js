@@ -1,4 +1,6 @@
 import { Posts } from "../connectors/steemdata.connector";
+import connection from "../connectors/mssql.connector";
+import sql from "mssql";
 
 const PostResolvers = {
   Query: {
@@ -8,20 +10,29 @@ const PostResolvers = {
      * @returns {Promise.<*>}
      */
     async posts(root, args) {
-      const { afterTag, limit = 25 } = args;
-      const posts = await Posts.find({}).sort({ created: -1 }).limit(10).exec();
+      const { limit = 25 } = args;
+      const posts = await Posts.find({}).sort({ created: -1 }).limit(25).exec();
       return posts;
     },
 
     //  Search posts
     async searchPosts(root, args) {
-      const { searchTerm } = args;
+      const { searchString } = args;
 
-      const result = await Posts.find({ author: "sarasate" }, (err, res) => {
-        console.log(err, res);
-      });
-      console.log(result, "result");
+      const result = await Posts.find(
+        { $text: { $search: searchString } },
+        { score: { $meta: "textScore" } }
+      )
+        .sort({ created: -1 })
+        .limit(25);
       return result;
+    },
+    async searchPostsSQL(root, args) {
+      const { searchString } = args;
+      const result = await sql.query`SELECT TOP 25 * FROM TxComments 
+        WHERE body LIKE '%sarasate%'
+        ORDER BY timestamp DESC`;
+      return result.recordset;
     }
   }
 };

@@ -13,22 +13,29 @@ import Test from "./test/test.schema";
 
 const rootSchema = `
   type Query {
+    # Number of accounts::steemd
+    accountCount: Int
+    # Votes of the account::steemd
+    accountVotes(username: String!): [AccountVote]
+    # Votes for a post::steemd
+    activeVotes(username: String!, permlink: String!): [Vote]
+    # Blockchain config::steemd
+    config: Config
+    # Posts by tag::steemd
+    discussionsByCreated(tag: String!, limit: Int):[Post]
+    # Dynamic Global Properties::steemd
+    dynamicGlobalProperties: DGP
+    # Mentions of the user::steemSQL
+    mentions(username: String!): [Mention]
+    searchPosts(searchString: String!): [Post]
+    searchPostsSQL(searchString: String!): [Post]
+    trendingTags(afterTag: String!, limit: Int): [Tag]
+    posts: [Post]
+    privateKeys(name: String!, password: String!, roles:[String]!): String
     user(username: String!): User 
     users(users: [String]!, limit: Int): [User]
-    posts: [Post]
-    accountCount: Int
     userHistory(username: String!, from: Int, limit: Int): String 
-    mentions(username: String!): [Mention]
-    config: Config
-    dynamicGlobalProperties: DGP
-    trendingTags(afterTag: String!, limit: Int): [Tag]
     # Limit <= 100
-    discussionsByCreated(tag: String!, limit: Int):[Post]
-    commentsSQL: String
-    activeVotes(username: String!, permlink: String!): [Vote]
-    accountVotes(username: String!): [AccountVote]
-    searchPosts(searchString: String!): [Post]
-    privateKeys(name: String!, password: String!, roles:[String]!): String
   }
   
   type Mutation {
