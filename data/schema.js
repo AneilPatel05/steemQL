@@ -27,12 +27,19 @@ const rootSchema = `
     dynamicGlobalProperties: DGP
     # Mentions of the user::steemSQL
     mentions(username: String!): [Mention]
+    # Search indexed field from posts::SteemData
     searchPosts(searchString: String!, limit: Int, skip: Int): [Post]
+    # Get posts for trending tags::steemd
     trendingTags(afterTag: String!, limit: Int): [Tag]
+    # Get posts::SteemData
     posts: [Post]
+    # Fetch private keys for provided user::steemd
     privateKeys(name: String!, password: String!, roles:[String]!): String
+    # Get user data for username::steemd
     user(username: String!): User 
+    # Get user data for a list of provided users::steemd
     users(users: [String]!, limit: Int): [User]
+    # Get history for user, returns a string at the moment::steemd
     userHistory(username: String!, from: Int, limit: Int): String 
     # Limit <= 100
   }
