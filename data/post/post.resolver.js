@@ -17,22 +17,16 @@ const PostResolvers = {
 
     //  Search posts
     async searchPosts(root, args) {
-      const { searchString } = args;
+      const { searchString, limit = 25, skip = 0 } = args;
 
       const result = await Posts.find(
         { $text: { $search: searchString } },
         { score: { $meta: "textScore" } }
       )
+        .skip(skip)
         .sort({ created: -1 })
-        .limit(25);
+        .limit(limit);
       return result;
-    },
-    async searchPostsSQL(root, args) {
-      const { searchString } = args;
-      const result = await sql.query`SELECT TOP 25 * FROM TxComments 
-        WHERE body LIKE '%sarasate%'
-        ORDER BY timestamp DESC`;
-      return result.recordset;
     }
   }
 };

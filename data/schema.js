@@ -27,8 +27,7 @@ const rootSchema = `
     dynamicGlobalProperties: DGP
     # Mentions of the user::steemSQL
     mentions(username: String!): [Mention]
-    searchPosts(searchString: String!): [Post]
-    searchPostsSQL(searchString: String!): [Post]
+    searchPosts(searchString: String!, limit: Int, skip: Int): [Post]
     trendingTags(afterTag: String!, limit: Int): [Tag]
     posts: [Post]
     privateKeys(name: String!, password: String!, roles:[String]!): String
