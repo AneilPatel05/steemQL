@@ -19,6 +19,7 @@ const PostResolvers = {
     async searchPosts(root, args) {
       const { searchString, limit = 25, skip = 0 } = args;
 
+
       const result = await Posts.find(
         { $text: { $search: searchString } },
         { score: { $meta: "textScore" } }

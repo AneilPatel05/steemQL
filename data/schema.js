@@ -9,6 +9,7 @@ import UserHistory from "./user/userHistory.schema";
 import Vote from "./vote/vote.schema";
 import AccountVote from "./vote/accountVote.schema";
 import Mention from "./mentions/mention.schema";
+import { DiscussionQuery } from "./discussions/discussion.schema";
 import Test from "./test/test.schema";
 
 const rootSchema = `
@@ -23,6 +24,8 @@ const rootSchema = `
     config: Config
     # Posts by tag::steemd
     discussionsByCreated(tag: String!, limit: Int):[Post]
+    # Get Discucssion::dsteem
+    getDiscussions(by: String, query: DiscussionQuery): [Post]
     # Dynamic Global Properties::steemd
     dynamicGlobalProperties: DGP
     # Mentions of the user::steemSQL
@@ -71,6 +74,7 @@ const typeDefs = [
   Vote,
   AccountVote,
   Mention,
+  DiscussionQuery,
   Test
 ];
 
