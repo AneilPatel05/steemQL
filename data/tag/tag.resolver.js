@@ -30,16 +30,7 @@ const TagResolvers = {
       return posts;
     },
 
-    async getDiscussions(root, args) {
-      // const { by = "created", query } = args;
-      const by = "created";
-      const discussions = await dsteem.database.getDiscussions(by, {
-        tag: "",
-        limit: 10
-      });
-      console.log(discussions);
-      return discussions;
-    }
+
   }
 };
 
