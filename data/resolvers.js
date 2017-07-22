@@ -1,7 +1,8 @@
 import _ from "lodash";
 import GlobalsResolvers from "./globals/globals.resolver";
-import AccountResolver from './accounts/account.resolver'
+import AccountResolver from "./accounts/account.resolver";
 import AuthResolvers from "./auth/auth.resolvers";
+import CommentResolvers from "./comment/comment.resolver";
 import TagResolvers from "./tag/tag.resolver";
 import UserResolvers from "./user/user.resolver";
 import VoteResolvers from "./vote/vote.resolver";
@@ -34,6 +35,7 @@ export default _.merge(
   GlobalsResolvers,
   AccountResolver,
   AuthResolvers,
+  CommentResolvers,
   TagResolvers,
   UserResolvers,
   VoteResolvers,

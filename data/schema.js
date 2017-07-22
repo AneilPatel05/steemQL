@@ -1,6 +1,7 @@
 import { makeExecutableSchema } from "graphql-tools";
 import resolvers from "./resolvers";
 import { Account } from "./accounts/account.schema";
+import { CommentInput } from "./comment/comment.schema";
 import Config from "./globals/config.schema";
 import DGP from "./globals/dgp.schema";
 import Tag from "./tag/tag.schema";
@@ -54,6 +55,8 @@ const rootSchema = `
     accountUpdate(wif: String!, account: String!, owner: String, 
       privateActiveKey: String, postingKey: String, publicMemoKey: String!, 
       jsonMetadata: String): User 
+    # Create post or comment::dsteem
+    comment(comment: CommentInput!, key: String!): String 
   }
   
   scalar Date
@@ -70,6 +73,7 @@ const typeDefs = [
   rootSchema,
   Account,
   Config,
+  CommentInput,
   DGP,
   Tag,
   Post,
