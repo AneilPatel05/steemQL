@@ -5,6 +5,7 @@ import { CommentInput } from "./comment/comment.schema";
 import Config from "./globals/config.schema";
 import DGP from "./globals/dgp.schema";
 import Tag from "./tag/tag.schema";
+import { Transaction } from "./transaction/transaction.schema";
 import Post from "./post/post.schema";
 import User from "./user/user.schema";
 import UserHistory from "./user/userHistory.schema";
@@ -56,7 +57,7 @@ const rootSchema = `
       privateActiveKey: String, postingKey: String, publicMemoKey: String!, 
       jsonMetadata: String): User 
     # Create post or comment::dsteem
-    comment(comment: CommentInput!, key: String!): String 
+    comment(comment: CommentInput!, key: String!): Transaction
   }
   
   scalar Date
@@ -76,6 +77,7 @@ const typeDefs = [
   CommentInput,
   DGP,
   Tag,
+  Transaction,
   Post,
   User,
   UserHistory,
