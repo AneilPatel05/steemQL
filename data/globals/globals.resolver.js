@@ -25,7 +25,7 @@ const GlobalsResolvers = {
 
     async getChainProperties() {
       return await dsteem.database.getChainProperties();
-    }
+    },
   }
 };
 
