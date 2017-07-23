@@ -7,7 +7,10 @@ import { CommentInput } from "./comment/comment.schema";
 import Config from "./globals/config.schema";
 import DGP from "./globals/dgp.schema";
 import Tag from "./tag/tag.schema";
-import { Transaction } from "./transaction/transaction.schema";
+import {
+  SignedTransaction,
+  Transaction
+} from "./transaction/transaction.schema";
 import Post from "./post/post.schema";
 import User from "./user/user.schema";
 import UserHistory from "./user/userHistory.schema";
@@ -82,7 +85,7 @@ const rootSchema = `
     getOwnerHistory(username: String!): String
     getRecoveryRequest(username: String!): String
     getTransactionHex(trx: String): String
-    getTransaction(trxId: Int!): Transaction
+    getTransaction(trxId: Int!): SignedTransaction
     getRequiredSignatures(trx: String!, availableKeys: String): String
     getPotentialSignatures(trx: String!): String
     verifyAuthority(nameOrId: String!, signers: [String]): String
@@ -129,6 +132,7 @@ const typeDefs = [
   Transaction,
   Post,
   SignedBlock,
+  SignedTransaction,
   User,
   UserHistory,
   Vote,

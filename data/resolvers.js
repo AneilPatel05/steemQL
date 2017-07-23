@@ -5,6 +5,7 @@ import AuthResolvers from "./auth/auth.resolvers";
 import BlockResolvers from "./blocks/block.resolvers";
 import CommentResolvers from "./comment/comment.resolver";
 import TagResolvers from "./tag/tag.resolver";
+import TransactionResolvers from "./transaction/transaction.resolvers";
 import UserResolvers from "./user/user.resolver";
 import VoteResolvers from "./vote/vote.resolver";
 import MentionResolvers from "./mentions/mention.resolvers";
@@ -39,6 +40,7 @@ export default _.merge(
   BlockResolvers,
   CommentResolvers,
   TagResolvers,
+  TransactionResolvers,
   UserResolvers,
   VoteResolvers,
   MentionResolvers,
