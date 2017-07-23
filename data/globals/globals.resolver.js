@@ -1,4 +1,5 @@
 import steem from "../connectors/steemjs.connector.js";
+import dsteem from "../connectors/dsteem.connector";
 import _ from "lodash";
 
 const GlobalsResolvers = {
@@ -20,6 +21,10 @@ const GlobalsResolvers = {
     async getDynamicGlobalProperties() {
       const dgp = await steem.api.getDynamicGlobalProperties();
       return dgp;
+    },
+
+    async getChainProperties() {
+      return await dsteem.database.getChainProperties();
     }
   }
 };

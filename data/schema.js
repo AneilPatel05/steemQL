@@ -2,6 +2,7 @@ import { makeExecutableSchema } from "graphql-tools";
 import resolvers from "./resolvers";
 import { Account } from "./accounts/account.schema";
 import { BlockHeader, SignedBlock } from "./blocks/block.schema";
+import { ChainProperties } from "./globals/globals.schema";
 import { CommentInput } from "./comment/comment.schema";
 import Config from "./globals/config.schema";
 import DGP from "./globals/dgp.schema";
@@ -63,7 +64,7 @@ const rootSchema = `
     getConfig: Config
     # steemJS::Dynamic Global Properties
     getDynamicGlobalProperties: DGP
-    getChainProperties: String
+    getChainProperties: ChainProperties 
     getFeedHistory: String
     getCurrentMedianHistoryPrice: String
     getHardforkVersion: String
@@ -120,6 +121,7 @@ const typeDefs = [
   rootSchema,
   Account,
   BlockHeader,
+  ChainProperties,
   Config,
   CommentInput,
   DGP,
