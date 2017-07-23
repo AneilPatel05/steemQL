@@ -8,6 +8,10 @@ const BlockResolvers = {
     async getBlockHeader(root, args) {
       const { blockNumber } = args;
       return await dsteem.database.getBlockHeader(blockNumber);
+    },
+    async getBlock(root, args) {
+      const { blockNumber } = args;
+      await dsteem.database.getBlock(blockNumber);
     }
   }
 };

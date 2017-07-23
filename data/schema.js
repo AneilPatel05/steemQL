@@ -1,7 +1,7 @@
 import { makeExecutableSchema } from "graphql-tools";
 import resolvers from "./resolvers";
 import { Account } from "./accounts/account.schema";
-import { BlockHeader } from "./blocks/block.schema";
+import { BlockHeader, SignedBlock } from "./blocks/block.schema";
 import { CommentInput } from "./comment/comment.schema";
 import Config from "./globals/config.schema";
 import DGP from "./globals/dgp.schema";
@@ -54,7 +54,7 @@ const rootSchema = `
     getDiscussions(by: String!, query: DiscussionQuery!): [Post]
     # promoted, trending, votes
     getBlockHeader(blockNumber: Int!): BlockHeader 
-    getBlock(blockNumber: Int!): String
+    getBlock(blockNumber: Int!): SignedBlock 
     getState(path: String!): String
     getTrendingCategories(after: String!, limit: Int): [Tag]
     getBestCategories(after: String!, limit: Int): [Tag]
@@ -126,6 +126,7 @@ const typeDefs = [
   Tag,
   Transaction,
   Post,
+  SignedBlock,
   User,
   UserHistory,
   Vote,
