@@ -9,3 +9,15 @@ export const CommentInput = `
     title: String!
   }
 `;
+
+export const CommentOptions = `
+  input CommentOptions {
+    allow_curation_rewards: Boolean
+    allow_votes: Boolean
+    author: String
+    extensions: String
+    max_accepted_payout: String
+    percent_steem_dollars: Int
+    permlink: String
+  }
+`;

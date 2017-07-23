@@ -21,6 +21,11 @@ const CommentResolvers = {
       );
       console.log(res);
       return res;
+    },
+
+    async deleteComment(root, args) {
+      const { key, author, permlink } = args;
+      return steem.broadcast.deleteComment(key, author, permlink);
     }
     // async comment(root, args) {
     //   let { comment, key } = args;

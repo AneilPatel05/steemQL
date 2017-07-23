@@ -3,7 +3,7 @@ import resolvers from "./resolvers";
 import { Account } from "./accounts/account.schema";
 import { BlockHeader, SignedBlock } from "./blocks/block.schema";
 import { ChainProperties } from "./globals/globals.schema";
-import { CommentInput } from "./comment/comment.schema";
+import { CommentInput, CommentOptions } from "./comment/comment.schema";
 import Config from "./globals/config.schema";
 import DGP from "./globals/dgp.schema";
 import Tag from "./tag/tag.schema";
@@ -74,8 +74,10 @@ const rootSchema = `
     accountUpdate(wif: String!, account: String!, owner: String, 
       privateActiveKey: String, postingKey: String, publicMemoKey: String!, 
       jsonMetadata: String): User 
-    # Create post or comment::dsteem
+    # Create post or comment::steemJS
     comment(comment: CommentInput!, key: String!): Transaction
+    # Delete comment::steemJS
+    deleteComment(author: String!, permlink: String!, key: String!): String
   }
   
   scalar Date
@@ -95,6 +97,7 @@ const typeDefs = [
   ChainProperties,
   Config,
   CommentInput,
+  CommentOptions,
   DGP,
   Tag,
   Transaction,
