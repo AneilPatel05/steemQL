@@ -1,6 +1,7 @@
 import { makeExecutableSchema } from "graphql-tools";
 import resolvers from "./resolvers";
 import { Account } from "./accounts/account.schema";
+import { BlockHeader } from "./blocks/block.schema";
 import { CommentInput } from "./comment/comment.schema";
 import Config from "./globals/config.schema";
 import DGP from "./globals/dgp.schema";
@@ -17,8 +18,6 @@ import Test from "./test/test.schema";
 
 const rootSchema = `
   type Query {
-    # Get Accounts::dsteem
-    getAccounts(usernames: [String!]!): [Account] 
     # Number of accounts::steemJS
     accountCount: Int
     # Votes of the account::steemJS
@@ -29,10 +28,7 @@ const rootSchema = `
     config: Config
     # Posts by tag::steemJS
     discussionsByCreated(tag: String!, limit: Int):[Post]
-    # Get Discucssion::dsteem
-    getDiscussions(by: String, query: DiscussionQuery): [Post]
-    # Dynamic Global Properties::steemJS
-    dynamicGlobalProperties: DGP
+
     # Mentions of the user::steemSQL
     mentions(username: String!): [Mention]
     # Search indexed field from posts::steemJSata
@@ -49,7 +45,57 @@ const rootSchema = `
     users(users: [String]!, limit: Int): [User]
     # Get history for user, returns a string at the moment::steemJS
     userHistory(username: String!, from: Int, limit: Int): String 
-    # Limit <= 100
+    # steemJS
+    getTrendingTags(afterTag: String, limit: Int): [Tag]
+    # Condensed version of getDiscussionsByXx
+    # Allowed values: active, blog, cashout, children, comments, feed, hot,
+    # promoted, trending, vote. Can be empty "" to fetch all posts.
+    # Note: For blog and feed this is a username.
+    getDiscussions(by: String!, query: DiscussionQuery!): [Post]
+    # promoted, trending, votes
+    getBlockHeader(blockNumber: Int!): BlockHeader 
+    getBlock(blockNumber: Int!): String
+    getState(path: String!): String
+    getTrendingCategories(after: String!, limit: Int): [Tag]
+    getBestCategories(after: String!, limit: Int): [Tag]
+    getActiveCategories(after: String!, limit: Int): [Tag]
+    getRecentCategories(after: String!, limit: Int): [Tag]
+    getConfig: Config
+    # steemJS::Dynamic Global Properties
+    getDynamicGlobalProperties: DGP
+    getChainProperties: String
+    getFeedHistory: String
+    getCurrentMedianHistoryPrice: String
+    getHardforkVersion: String
+    getNextScheduledHardfork: String
+    getRewardFund(name: String!): String
+    getVestingDelegations(account: String!, from: String, limit: Int): String
+    getKeyReferences(key: String): String
+    getAccounts(usernames: [String!]!): Account 
+    getAccountReferences(accountId: Int): String
+    lookupAccountNames(usernames: [String!]!): String
+    lookupAccounts(lowerBoundName: String, limit: Int): String
+    getAccountCount: Int
+    getConversionRequests(username: String!): String
+    getAccountHistory(username: String!): String
+    getOwnerHistory(username: String!): String
+    getRecoveryRequest(username: String!): String
+    getTransactionHex(trx: String): String
+    getTransaction(trxId: Int!): Transaction
+    getRequiredSignatures(trx: String!, availableKeys: String): String
+    getPotentialSignatures(trx: String!): String
+    verifyAuthority(nameOrId: String!, signers: [String]): String
+    getActiveVotes(username: String!, permlink: String!): [Vote]
+    getAccountVotes(username: String!): [AccountVote]
+    getContent(username: String!, permlink: String!): String
+    getContentReplies(parent: String, parentPermlink: String): String
+    getDiscussionsByAuthorBeforeDate(username: String!, startPermlink: String!,
+      beforeDate: String, limit: Int): [Post]
+    getRepliesByLastUpdate(startAuthor: String, startPermlink: String, limit: Int): String
+    
+    # Get Accounts::dsteem
+    getAccounts(usernames: [String!]!): [Account] 
+    
   }
   
   type Mutation {
@@ -73,6 +119,7 @@ const rootSchema = `
 const typeDefs = [
   rootSchema,
   Account,
+  BlockHeader,
   Config,
   CommentInput,
   DGP,
