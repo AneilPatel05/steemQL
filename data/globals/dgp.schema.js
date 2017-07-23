@@ -1,5 +1,5 @@
 const DGP = `
-  type DGP {
+  type DynamicGlobalProperties {
     id: Int
     head_block_number: Int
     head_block_id: String

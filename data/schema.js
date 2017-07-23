@@ -63,7 +63,7 @@ const rootSchema = `
     getRecentCategories(after: String!, limit: Int): [Tag]
     getConfig: Config
     # steemJS::Dynamic Global Properties
-    getDynamicGlobalProperties: DGP
+    getDynamicGlobalProperties: DynamicGlobalProperties
     getChainProperties: ChainProperties 
     getFeedHistory: String
     getCurrentMedianHistoryPrice: String
