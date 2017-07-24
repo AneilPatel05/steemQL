@@ -27,6 +27,12 @@ const CommentResolvers = {
       return steem.broadcast.deleteComment(key, author, permlink);
     },
 
+    /**
+     * Broadcast new comment or post.
+     * @param root
+     * @param args - {comment: CommentInput, key: String}
+     * @returns {Promise.<*>}
+     */
     async comment(root, args) {
       const { comment, key } = args;
       const result = await dsteem.broadcast.comment(
@@ -36,6 +42,14 @@ const CommentResolvers = {
       console.log(result);
       return result;
     },
+
+    /**
+     * Broadcast a new post or comment with specific options.
+     * @param root
+     * @param args -{comment: CommentInput, options: CommentOptions, key:
+      * String}
+     * @returns {Promise.<*>}
+     */
     async commentWithOptions(root, args) {
       const { comment, options, key } = args;
       _.set(options, "extensions", [

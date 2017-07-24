@@ -38,7 +38,9 @@ const rootSchema = `
     searchPosts(searchString: String!, limit: Int, skip: Int): [Post]
     # Get posts for trending tags
     posts: [Post]
-   # Get user data for username::steemJS
+    # Get single post or comment
+    post(author: String!, permlink: String!): Post 
+    # Get user data for username::steemJS
     user(username: String!): User 
     # Get user data for a list of provided users::steemJS
     users(users: [String]!, limit: Int): [User]
