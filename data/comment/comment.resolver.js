@@ -28,13 +28,26 @@ const CommentResolvers = {
     },
 
     async comment(root, args) {
-      let { comment, key } = args;
+      const { comment, key } = args;
       const result = await dsteem.broadcast.comment(
         comment,
         PrivateKey.from(key)
       );
       console.log(result);
       return result;
+    },
+    async commentWithOptions(root, args) {
+      const { comment, options, key } = args;
+      _.set(options, "extensions", [
+        [0, { beneficiaries: options.extensions }]
+      ]);
+      const res = await dsteem.broadcast.commentWithOptions(
+        comment,
+        options,
+        PrivateKey.from(key)
+      );
+      console.log(res);
+      return res;
     }
   }
 };

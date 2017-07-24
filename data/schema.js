@@ -3,13 +3,18 @@ import resolvers from "./resolvers";
 import { Account } from "./accounts/account.schema";
 import { BlockHeader, SignedBlock } from "./blocks/block.schema";
 import { ChainProperties } from "./globals/globals.schema";
-import { CommentInput, CommentOptions } from "./comment/comment.schema";
+import {
+  CommentInput,
+  CommentOptions,
+  ExtensionInput
+} from "./comment/comment.schema";
 import Config from "./globals/config.schema";
 import DGP from "./globals/dgp.schema";
 import Tag from "./tag/tag.schema";
 import {
   SignedTransaction,
-  Transaction
+  Transaction,
+  TransactionConfirmation
 } from "./transaction/transaction.schema";
 import Post from "./post/post.schema";
 import User from "./user/user.schema";
@@ -75,7 +80,10 @@ const rootSchema = `
       privateActiveKey: String, postingKey: String, publicMemoKey: String!, 
       jsonMetadata: String): User 
     # Create post or comment::steemJS
-    comment(comment: CommentInput!, key: String!): Transaction
+    comment(comment: CommentInput!, key: String!): TransactionConfirmation
+    # Comment with options
+    commentWithOptions(comment: CommentInput!, options: CommentOptions!, key: String!):
+      TransactionConfirmation
     # Delete comment::steemJS
     deleteComment(author: String!, permlink: String!, key: String!): String
   }
@@ -99,8 +107,10 @@ const typeDefs = [
   CommentInput,
   CommentOptions,
   DGP,
+  ExtensionInput,
   Tag,
   Transaction,
+  TransactionConfirmation,
   Post,
   SignedBlock,
   SignedTransaction,

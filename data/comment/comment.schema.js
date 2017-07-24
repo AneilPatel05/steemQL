@@ -15,9 +15,16 @@ export const CommentOptions = `
     allow_curation_rewards: Boolean
     allow_votes: Boolean
     author: String
-    extensions: String
+    extensions: [ExtensionInput] 
     max_accepted_payout: String
     percent_steem_dollars: Int
     permlink: String
+  }
+`;
+
+export const ExtensionInput = `
+  input ExtensionInput {
+    account: String!
+    weight: Int!
   }
 `;

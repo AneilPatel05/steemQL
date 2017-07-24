@@ -9,6 +9,15 @@ export const Transaction = `
   }
 `;
 
+export const TransactionConfirmation = `
+  type TransactionConfirmation {
+    block_num: Int
+    expired: Boolean
+    id: String
+    trx_num: Int
+  }
+`
+
 export const SignedTransaction = `
   type SignedTransaction {
     ref_block_num: String
