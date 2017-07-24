@@ -78,6 +78,9 @@ const rootSchema = `
    }
   
   type Mutation {
+    # Convenience method to create a post
+    createPost(author: String!, title: String!, body: String!, tags: [String!]!, key: String!):
+      Post
     accountUpdate(wif: String!, account: String!, owner: String, 
       privateActiveKey: String, postingKey: String, publicMemoKey: String!, 
       jsonMetadata: String): User 

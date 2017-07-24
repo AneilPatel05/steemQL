@@ -1,7 +1,11 @@
 import { Posts } from "../connectors/steemdata.connector";
+import fp from "lodash/fp";
 import connection from "../connectors/mssql.connector";
 import sql from "mssql";
 import steem from "steem";
+import dsteem from "../connectors/dsteem.connector";
+import { PrivateKey } from "dsteem";
+import { createPermLink, createJSONMetadata } from "../../helpers/helpers";
 
 const PostResolvers = {
   Query: {
@@ -39,6 +43,25 @@ const PostResolvers = {
         .sort({ created: -1 })
         .limit(limit);
       return result;
+    }
+  },
+  Mutation: {
+    async createPost(root, args) {
+      const { author, title, body, tags, key } = args;
+
+      const post = {
+        author: author,
+        title: title,
+        body: body,
+        permlink: createPermLink(title),
+        json_metadata: createJSONMetadata({ tags: tags }),
+        parent_author: "",
+        parent_permlink: tags[0]
+      };
+
+      const res = await dsteem.broadcast.comment(post, PrivateKey.from(key));
+
+      return await steem.api.getContent(post.author, post.permlink);
     }
   }
 };
