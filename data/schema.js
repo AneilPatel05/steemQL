@@ -81,6 +81,9 @@ const rootSchema = `
     # Convenience method to create a post
     createPost(author: String!, title: String!, body: String!, tags: [String!]!, key: String!):
       Post
+    # Convenience method to create a comment
+    createComment(author: String!, body: String!, parent_author: String!, 
+      parent_permlink: String!, key: String!): Post
     accountUpdate(wif: String!, account: String!, owner: String, 
       privateActiveKey: String, postingKey: String, publicMemoKey: String!, 
       jsonMetadata: String): User 

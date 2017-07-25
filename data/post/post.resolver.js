@@ -62,6 +62,21 @@ const PostResolvers = {
       const res = await dsteem.broadcast.comment(post, PrivateKey.from(key));
 
       return await steem.api.getContent(post.author, post.permlink);
+    },
+    async createComment(root, args) {
+      const { author, body, parent_author, parent_permlink, key } = args;
+      const comment = {
+        author: author,
+        title: "",
+        body: body,
+        permlink: "re-" + createPermLink(parent_permlink),
+        json_metadata: "",
+        parent_author: parent_author,
+        parent_permlink: parent_permlink
+      };
+      const res = await dsteem.broadcast.comment(comment, PrivateKey.from(key));
+
+      return await steem.api.getContent(comment.author, comment.permlink);
     }
   }
 };
