@@ -9,8 +9,7 @@ const DiscussionResolver = {
      */
     async getDiscussions(root, args) {
       const { by = "created", query } = args;
-      // const by = "created";
-      // const discussions = await dsteem.database.getDiscussions(by, query);
+      const discussions = await dsteem.database.getDiscussions(by, query);
       console.log(discussions);
       return discussions;
     }

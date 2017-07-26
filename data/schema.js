@@ -84,12 +84,13 @@ const rootSchema = `
     # Convenience method to create a comment
     createComment(author: String!, body: String!, parent_author: String!, 
       parent_permlink: String!, key: String!): Post
+    # Update account data
     accountUpdate(wif: String!, account: String!, owner: String, 
       privateActiveKey: String, postingKey: String, publicMemoKey: String!, 
       jsonMetadata: String): User 
-    # Create post or comment::steemJS
+    # Create post or comment::dsteem
     comment(comment: CommentInput!, key: String!): TransactionConfirmation
-    # Comment with options
+    # Comment with options::dsteem
     commentWithOptions(comment: CommentInput!, options: CommentOptions!, key: String!):
       TransactionConfirmation
     # Delete comment::steemJS
