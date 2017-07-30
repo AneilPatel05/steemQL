@@ -36,6 +36,9 @@ const rootSchema = `
     mentions(username: String!): [Mention]
     # Search indexed field from posts
     searchPosts(searchString: String!, limit: Int, skip: Int): [Post]
+    # Filter posts by author reputation etc.
+    filterPosts(maxRep: String, minRep: String, sortBy: String, order: Int
+      limit: Int): [Post]
     # Get posts for trending tags
     posts: [Post]
     # Get single post or comment

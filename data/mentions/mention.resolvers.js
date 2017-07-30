@@ -1,7 +1,5 @@
 import _ from "lodash";
 // import { Mention } from "../connectors/steemsql.connector";
-import connection from "../connectors/mssql.connector";
-import Request from "tedious";
 import sql from "mssql";
 
 const MentionResolvers = {

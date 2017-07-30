@@ -8,7 +8,7 @@ const Post = `
     parent_permlink: String
     title: String
     body: String
-    json_metadata: String
+    json_metadata: String 
     last_update: String
     created: String
     active: String
@@ -40,6 +40,7 @@ const Post = `
     author_reputation: String
     promoted: String
     body_length: Int
+    authorObject: User
   }
 `;
 

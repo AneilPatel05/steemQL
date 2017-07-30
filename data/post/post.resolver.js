@@ -43,6 +43,32 @@ const PostResolvers = {
         .sort({ created: -1 })
         .limit(limit);
       return result;
+    },
+    /**
+     * Filter posts.
+     * @param root
+     * @param args
+     * @returns {Promise.<void>}
+     */
+    async filterPosts(root, args) {
+      const {
+        maxRep = 100,
+        minRep = 0,
+        sortBy = "created",
+        order = -1,
+        limit = 25
+      } = args;
+      const sort = {};
+      sort[sortBy] = order;
+      console.log(sort);
+
+      const posts = await Posts.find({
+        author_reputation: { $lt: maxRep, $gt: minRep }
+      })
+        .sort(sort)
+        .limit(limit);
+      console.log(posts);
+      return posts;
     }
   },
   Mutation: {
@@ -77,6 +103,12 @@ const PostResolvers = {
       const res = await dsteem.broadcast.comment(comment, PrivateKey.from(key));
 
       return await steem.api.getContent(comment.author, comment.permlink);
+    }
+  },
+  Post: {
+    async authorObject(root, args) {
+      const res = await dsteem.database.getAccounts([root.author]);
+      return res[0];
     }
   }
 };
