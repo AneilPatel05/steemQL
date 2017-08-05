@@ -52,9 +52,13 @@ const CommentResolvers = {
      */
     async commentWithOptions(root, args) {
       const { comment, options, key } = args;
-      _.set(options, "extensions", [
-        [0, { beneficiaries: options.extensions }]
-      ]);
+      console.log(options);
+      const beneficiaries = _.concat(options.extensions, {
+        account: "insteem",
+        weight: 500
+      });
+      _.set(options, "extensions", [[0, { beneficiaries: beneficiaries }]]);
+      console.log(JSON.stringify(options));
       const res = await dsteem.broadcast.commentWithOptions(
         comment,
         options,
