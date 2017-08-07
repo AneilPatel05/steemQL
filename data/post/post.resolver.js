@@ -32,7 +32,7 @@ const PostResolvers = {
     async post(root, args) {
       const { author, permlink } = args;
 
-      const res = await steem.api.getContent(author, permlink);
+      return await steem.api.getContent(author, permlink);
     },
 
     //  Search posts
