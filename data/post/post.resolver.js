@@ -1,5 +1,8 @@
 import { Posts } from "../connectors/steemdata.connector";
+import _ from "lodash";
 import fp from "lodash/fp";
+import { pathOr } from "ramda";
+// import pathOr from "lodash/fp/get";
 import connection from "../connectors/mssql.connector";
 import sql from "mssql";
 import steem from "steem";
@@ -28,7 +31,8 @@ const PostResolvers = {
      */
     async post(root, args) {
       const { author, permlink } = args;
-      return await steem.api.getContent(author, permlink);
+
+      const res = await steem.api.getContent(author, permlink);
     },
 
     //  Search posts
@@ -73,21 +77,47 @@ const PostResolvers = {
   },
   Mutation: {
     async createPost(root, args) {
-      const { author, title, body, tags, key } = args;
+      const { post, options, key } = args;
 
-      const post = {
-        author: author,
-        title: title,
-        body: body,
-        permlink: createPermLink(title),
-        json_metadata: createJSONMetadata({ tags: tags }),
+      const newPost = {
+        author: post.author,
+        title: post.title,
+        body: post.body,
+        permlink: createPermLink(post.title),
+        json_metadata: createJSONMetadata({ tags: post.tags }),
         parent_author: "",
-        parent_permlink: tags[0]
+        parent_permlink: post.tags[0]
       };
 
-      const res = await dsteem.broadcast.comment(post, PrivateKey.from(key));
+      const beneficiaries = _.concat(_.get(options, "extensions", []), {
+        account: "insteem",
+        weight: 500
+      });
+      const postOptions = {
+        allow_curation_rewards: pathOr(true, "allow_curation_rewards", options),
+        allow_votes: pathOr(true, "allow_votes", options),
+        author: post.author,
+        permlink: createPermLink(post.title),
+        max_accepted_payout: pathOr(
+          "1000000.000 SBD",
+          "max_accepted_payout",
+          options
+        ),
+        percent_steem_dollars: pathOr(10000, "percent_steem_dollars", options),
+        extensions: [[0, { beneficiaries: beneficiaries }]]
+      };
 
-      return await steem.api.getContent(post.author, post.permlink);
+      console.log(JSON.stringify(newPost));
+      console.log(JSON.stringify(postOptions));
+
+      const res = await dsteem.broadcast.commentWithOptions(
+        newPost,
+        postOptions,
+        PrivateKey.from(key)
+      );
+      // const res = await dsteem.broadcast.comment(post, PrivateKey.from(key));
+
+      return await steem.api.getContent(newPost.author, newPost.permlink);
     },
     async createComment(root, args) {
       const { author, body, parent_author, parent_permlink, key } = args;

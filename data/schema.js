@@ -39,10 +39,6 @@ const rootSchema = `
     # Filter posts by author reputation etc.
     filterPosts(maxRep: String, minRep: String, sortBy: String, order: Int
       limit: Int): [Post]
-    # Get posts for trending tags
-    posts: [Post]
-    # Get single post or comment
-    post(author: String!, permlink: String!): Post 
     # Get user data for username::steemJS
     user(username: String!): User 
     # Get user data for a list of provided users::steemJS
@@ -81,9 +77,7 @@ const rootSchema = `
    }
   
   type Mutation {
-    # Convenience method to create a post
-    createPost(author: String!, title: String!, body: String!, tags: [String!]!, key: String!):
-      Post
+    
     # Convenience method to create a comment
     createComment(author: String!, body: String!, parent_author: String!, 
       parent_permlink: String!, key: String!): Post
