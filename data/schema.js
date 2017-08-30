@@ -23,6 +23,7 @@ import Vote from "./vote/vote.schema";
 import AccountVote from "./vote/accountVote.schema";
 import Mention from "./mentions/mention.schema";
 import { DiscussionQuery } from "./discussions/discussion.schema";
+import Search from "./search/search.schema";
 import Test from "./test/test.schema";
 
 const rootSchema = `
@@ -126,6 +127,7 @@ const typeDefs = [
   AccountVote,
   Mention,
   DiscussionQuery,
+  Search,
   Test
 ];
 
