@@ -18,8 +18,12 @@ const PostResolvers = {
      * @returns {Promise.<*>}
      */
     async posts(root, args) {
-      const { limit = 25 } = args;
-      const posts = await Posts.find({}).sort({ created: -1 }).limit(25).exec();
+      const { by = "created", tag = "", limit = 25 } = args;
+      const query = {
+        tag: tag,
+        limit: limit
+      };
+      const posts = await dsteem.database.getDiscussions(by, query);
       return posts;
     },
 

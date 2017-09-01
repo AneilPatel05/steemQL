@@ -65,7 +65,7 @@ const Post = `
   
   extend type Query {
     # Get posts
-    posts: [Post]
+    posts(by: String, tag:String): [Post]
     # Get single post or comment
     post(author: String!, permlink: String!): Post 
   }
