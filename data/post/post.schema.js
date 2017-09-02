@@ -64,8 +64,8 @@ const Post = `
   }
   
   extend type Query {
-    # Get posts
-    posts(by: String, tag:String): [Post]
+    # Get posts. Defauts to 'created' and all tags/categories if no param is provided.
+    posts(by: String, tag:String, truncate_body: Int): [Post]
     # Get single post or comment
     post(author: String!, permlink: String!): Post 
   }
