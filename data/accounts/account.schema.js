@@ -1,7 +1,7 @@
 export const Account = `
   type Account {
     id: ID!
-    name: String 
+    name: String! 
     last_owner_update: String
     last_account_update: String
     created: String
@@ -65,4 +65,18 @@ export const Account = `
     vesting_balance: String
     reputation: String 
     posts(limit: Int): [Post]
-  }`;
+  }
+  
+  extend type Query {
+    # Get accounts
+    accounts(
+    # Array of usernames
+    usernames: [String!]!): [Account] 
+    # Get single account
+    account(username: String!): Account
+    # Get number of steem accounts.
+    accountCount: Int
+    # Get history for account
+    accountHistory(username: String!, from: Int, limit: Int): String 
+  }
+  `;

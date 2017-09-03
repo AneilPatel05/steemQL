@@ -18,6 +18,8 @@ const Search = `
   } 
   
   extend type Query {
+    # Search powered by asksteem.com.
+    # Returns a set of posts with limited properties.
     search(searchString: String!): Search
   }
 `;

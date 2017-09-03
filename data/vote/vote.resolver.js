@@ -6,7 +6,7 @@ import steem from "../connectors/steemjs.connector.js";
  */
 const VoteResolvers = {
   Query: {
-    async getActiveVotes(root, args) {
+    async activeVotes(root, args) {
       const { username, permlink } = args;
       const votes = await steem.api.getActiveVotes(username, permlink);
       return votes;
@@ -18,7 +18,7 @@ const VoteResolvers = {
      * @param args
      * @returns {Promise.<void>}
      */
-    async getAccountVotes(root, args) {
+    async accountVotes(root, args) {
       const { username } = args;
       const votes = await steem.api.getAccountVotes(username);
       return votes;

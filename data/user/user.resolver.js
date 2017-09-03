@@ -32,7 +32,7 @@ const UserResolvers = {
         publicMemoKey,
         jsonMetadata = null
       } = args;
-      const result = await steem.broadcast.accountUpdateAsync(
+      const result = await steem.broadcast.accountUpdate(
         wif,
         account,
         owner,
@@ -49,7 +49,7 @@ const UserResolvers = {
     async posts(root, args) {
       const { limit = 25 } = args;
 
-      const posts = await steem.api.getDiscussionsByAuthorBeforeDateAsync(
+      const posts = await steem.api.getDiscussionsByAuthorBeforeDate(
         root.name,
         "",
         moment().utc().format("YYYY-MM-DD[T]HHmmss"),

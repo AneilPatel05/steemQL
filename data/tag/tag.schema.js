@@ -7,6 +7,14 @@ const Tag = `
     comments: Int
     trending: String
   }
+  
+  extend type Query {
+    trendingTags(
+    # Starting tag to filter from 
+    afterTag: String, 
+    # Default: 25 
+    limit: Int): [Tag] 
+  }
 `;
 
 export default Tag;

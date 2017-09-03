@@ -4,4 +4,10 @@ export const ChainProperties = `
     minimum_block_size: Int
     sbd_interest_rate: Int
   }
+  
+  extend type Query {
+    chainProperties: ChainProperties 
+    config: Config
+    dynamicGlobalProperties: DynamicGlobalProperties
+  }
 `;

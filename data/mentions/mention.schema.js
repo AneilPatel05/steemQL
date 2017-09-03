@@ -10,6 +10,11 @@ const Mention = `
     timestamp: String 
     json_metadata: String
   }
+  
+  extend type Query {
+    # Mentions of the user
+    mentions(username: String!): [Mention]
+  }
 `;
 
 export default Mention;

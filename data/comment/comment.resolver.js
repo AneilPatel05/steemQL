@@ -5,6 +5,12 @@ import _ from "lodash";
 import moment from "moment";
 
 const CommentResolvers = {
+  Query: {
+    async replies(root, args) {
+      const { parent, parentPermlink } = args;
+      return await steem.api.getContentReplies(parent, parentPermlink);
+    }
+  },
   Mutation: {
     // async comment(root, args) {
     //   const { comment, key } = args;

@@ -40,45 +40,6 @@ const PostResolvers = {
       return await steem.api.getContent(author, permlink);
     },
 
-    //  Search posts
-    async searchPosts(root, args) {
-      const { searchString, limit = 25, skip = 0 } = args;
-
-      const result = await Posts.find(
-        { $text: { $search: searchString } },
-        { score: { $meta: "textScore" } }
-      )
-        .skip(skip)
-        .sort({ created: -1 })
-        .limit(limit);
-      return result;
-    },
-    /**
-     * Filter posts.
-     * @param root
-     * @param args
-     * @returns {Promise.<void>}
-     */
-    async filterPosts(root, args) {
-      const {
-        maxRep = 100,
-        minRep = 0,
-        sortBy = "created",
-        order = -1,
-        limit = 25
-      } = args;
-      const sort = {};
-      sort[sortBy] = order;
-      console.log(sort);
-
-      const posts = await Posts.find({
-        author_reputation: { $lt: maxRep, $gt: minRep }
-      })
-        .sort(sort)
-        .limit(limit);
-      console.log(posts);
-      return posts;
-    }
   },
   Mutation: {
     async createPost(root, args) {

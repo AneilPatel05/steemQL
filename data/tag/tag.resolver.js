@@ -10,7 +10,7 @@ const TagResolvers = {
      * args.limit - Number of items to fetch.
      * @returns {Promise.<*>}
      */
-    async getTrendingTags(root, args) {
+    async trendingTags(root, args) {
       const { afterTag, limit = 25 } = args;
       const tags = await steem.api.getTrendingTags(afterTag, limit);
       return tags;

@@ -5,11 +5,11 @@ import moment from "moment";
 
 const BlockResolvers = {
   Query: {
-    async getBlockHeader(root, args) {
+    async blockHeader(root, args) {
       const { blockNumber } = args;
       return await dsteem.database.getBlockHeader(blockNumber);
     },
-    async getBlock(root, args) {
+    async block(root, args) {
       const { blockNumber } = args;
       await dsteem.database.getBlock(blockNumber);
     }

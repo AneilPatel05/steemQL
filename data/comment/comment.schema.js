@@ -1,4 +1,4 @@
-export const CommentInput = `
+export const Comment = `
   input CommentInput {
     author: String!
     body: String!
@@ -8,9 +8,7 @@ export const CommentInput = `
     permlink: String!
     title: String!
   }
-`;
 
-export const CommentOptions = `
   input CommentOptions {
     allow_curation_rewards: Boolean
     allow_votes: Boolean
@@ -20,11 +18,14 @@ export const CommentOptions = `
     percent_steem_dollars: Int
     permlink: String
   }
-`;
 
-export const ExtensionInput = `
   input ExtensionInput {
     account: String!
     weight: Int!
+  }
+  
+  extend type Query {
+    # Replies for a post
+    replies(parent: String, parentPermlink: String): Post 
   }
 `;

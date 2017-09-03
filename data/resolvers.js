@@ -4,16 +4,13 @@ import AccountResolver from "./accounts/account.resolver";
 import AuthResolvers from "./auth/auth.resolvers";
 import BlockResolvers from "./blocks/block.resolvers";
 import CommentResolvers from "./comment/comment.resolver";
-import ContentResolvers from "./content/content.resolvers";
 import TagResolvers from "./tag/tag.resolver";
 import TransactionResolvers from "./transaction/transaction.resolvers";
 import UserResolvers from "./user/user.resolver";
 import VoteResolvers from "./vote/vote.resolver";
 import MentionResolvers from "./mentions/mention.resolvers";
 import PostResolvers from "./post/post.resolver";
-import DiscussionResolver from "./discussions/discussion.resolver";
 import SearchResolvers from "./search/search.resolvers";
-import TestResolvers from "./test/test.resolvers";
 
 const rootResolvers = {
   Query: {},
@@ -41,14 +38,11 @@ export default _.merge(
   AuthResolvers,
   BlockResolvers,
   CommentResolvers,
-  ContentResolvers,
   TagResolvers,
   TransactionResolvers,
   UserResolvers,
   VoteResolvers,
   MentionResolvers,
   PostResolvers,
-  DiscussionResolver,
-  SearchResolvers,
-  TestResolvers
+  SearchResolvers
 );

@@ -65,6 +65,16 @@ const User = `
     vesting_balance: String
     reputation: String 
     posts(limit: Int): [Post]
-  }`;
+  }
+  
+  extend type Query {
+    # Get user data for username
+    user(username: String!): User 
+    @deprecated(reason: "Use account")
+    # Get user data for a list of provided users
+    users(users: [String]!, limit: Int): [User] 
+    @deprecated(reason: "Use accounts")
+  }
+  `;
 
 export default User;

@@ -3,7 +3,7 @@ import steem from "steem";
 
 const TransactionResolvers = {
   Query: {
-    async getTransaction(root, args) {
+    async transaction(root, args) {
       const { transactionId } = args;
       const res = steem.api.getTransaction(transactionId);
       console.log(res);

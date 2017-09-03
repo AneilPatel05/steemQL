@@ -1,5 +1,6 @@
 import dsteem from "../connectors/dsteem.connector";
 import steem from "steem";
+import { head } from "lodash/fp";
 import _ from "lodash";
 import moment from "moment";
 
@@ -11,26 +12,28 @@ const AccountResolvers = {
      * @param args.users - Array of usernames.
      * @returns {Promise.<*>}
      */
-    async getAccounts(root, args) {
+    async accounts(root, args) {
       const { usernames } = args;
       return await dsteem.database.getAccounts(usernames);
     },
 
-    async lookupAccountNames(root, args) {
-      const { usernames } = args;
-      return await steem.api.lookupAccountNames(usernames);
-    },
-
-    async lookupAccounts(root, args) {
-      const { lowerBoundName, limit = 25 } = args;
-      return await steem.api.lookupAccounts(lowerBoundName, limit);
+    /**
+     * Get single account.
+     * @param root
+     * @param args
+     * @returns {Promise.<*>}
+     */
+    async account(root, args) {
+      const { username } = args;
+      const res = await dsteem.database.getAccounts([username]);
+      return head(res);
     },
 
     /**
      * Get number of steem accounts.
      * @returns {Promise.<*>}
      */
-    async getAccountCount() {
+    async accountCount() {
       const count = await steem.api.getAccountCount();
       return count;
     },
@@ -40,7 +43,7 @@ const AccountResolvers = {
      * @param args
      * @return {Promise.<*>}
      */
-    async getAccountHistory(root, args) {
+    async accountHistory(root, args) {
       const { username, from = 50, limit = 25 } = args;
       const history = await steem.api.getAccountHistory(username, from, limit);
       console.log(JSON.stringify(history));
