@@ -20,6 +20,7 @@ import Search from "./search/search.schema";
 const rootSchema = `
   type Query {
 
+    version: String!
     # Posts by tag::steemJS
     discussionsByCreated(tag: String!, limit: Int):[Post]
     @deprecated(reason: "Replaced by getDiscussions()")

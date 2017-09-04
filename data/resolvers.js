@@ -13,7 +13,11 @@ import PostResolvers from "./post/post.resolver";
 import SearchResolvers from "./search/search.resolvers";
 
 const rootResolvers = {
-  Query: {},
+  Query: {
+    version() {
+      return "0.3.0";
+    }
+  },
 
   Date: {
     __parseValue(value) {
